@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 exports.register = async (req, res) => {
   const { name, email, password } = req.body;
   const hashpassword = await bcrypt.hash(password, 10);
-  console.log(name, email, password, hashpassword);
+  // console.log(name, email, password, hashpassword);
   try {
     const userInDB = await User.find({ email: email });
     if (userInDB.length == 0) {
@@ -16,9 +16,13 @@ exports.register = async (req, res) => {
         const token = jwt.sign({ userId: data._id }, "saurabh", {
           expiresIn: "10000h",
         });
+
+        //mail send function here
+
         console.log(token);
         res.status(201).json({
-          message: "Register Successfully",
+          message: "verification mail is sent Successfully",
+          status: " verification panding",
           token: token,
         });
       }
