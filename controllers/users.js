@@ -13,7 +13,7 @@ exports.register = async (req, res) => {
       const data = new User({ name, email, hashpassword });
       await data.save();
       if (data) {
-        const token = jwt.sign({ userId: data.id }, "saurabh", {
+        const token = jwt.sign({ userId: data._id }, "saurabh", {
           expiresIn: "10000h",
         });
         console.log(token);
