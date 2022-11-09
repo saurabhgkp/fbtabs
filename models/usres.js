@@ -4,6 +4,7 @@ const users = mongoose.Schema({
   name: String,
   email: String,
   password: String,
+  uniqueString: String,
 
   isActive: {
     type: Boolean,
