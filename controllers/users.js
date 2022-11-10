@@ -103,18 +103,50 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.address = async (req, res) => {
+exports.addressCreate = async (req, res) => {
   const { address } = req.body;
-
-  const userId = req.userId
+  console.log(req.userId, "======", address);
 
   try {
-    const data = await User.findByIdAndUpdate(userId, {
+    if (req.userId == undefined) {
+      return res.status(401).json({
+        status: 0,
+        message: "request not authorize."
+      })
+    }
+    const data = await User.findByIdAndUpdate(req.userId, {
       address: address,
     });
     return res.status(200).json({
       status: 1,
+      message: "Address add Successfully",
       address: address,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      status: 0,
+      message: "something went wrong",
+    });
+  }
+};
+exports.phoneNoCreate = async (req, res) => {
+  const { Number } = req.body;
+  console.log(req.userId, "======", Number);
+
+  try {
+    if (req.userId == undefined) {
+      return res.status(401).json({
+        status: 0,
+        message: "request not authorize."
+      })
+    }
+    const data = await User.findByIdAndUpdate(req.userId, {
+      phoneNo: Number,
+    });
+    return res.status(200).json({
+      status: 1,
+      message: "Number add Successfully",
+      phoneNo: Number,
     });
   } catch (err) {
     return res.status(500).json({

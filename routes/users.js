@@ -15,12 +15,10 @@ router.get("/verify/:userId/:uniqueString", userController.verify);
 
 router.post("/login", userController.login);
 
-// Address Contact Number add 
-router.post("/address", userController.address);
-// Address Contact Number edit
 
-// Address Contact Number delete
+router.post("/addressCreate", isAuth, userController.addressCreate);
 
+router.post("/phoneNoCreate", isAuth, userController.phoneNoCreate);
 // checkout model  userId ProductId status address  Schedule time Instructions Subtotal(jsonb)
 
 //Delivery Schedule, Delivery Instructions,Delivery Tip, Subtotal

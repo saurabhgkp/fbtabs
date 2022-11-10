@@ -1,3 +1,4 @@
+const { Number } = require("mongoose");
 const mongoose = require("mongoose");
 
 const users = mongoose.Schema({
@@ -5,6 +6,8 @@ const users = mongoose.Schema({
   email: String,
   password: String,
   uniqueString: String,
+  address: String,
+  phoneNo: Number,
 
   isActive: {
     type: Boolean,
