@@ -208,3 +208,22 @@ exports.removeItem = async (req, res) => {
     });
   }
 };
+
+exports.getItem = async (req, res) => {
+
+  try {
+    const data = await User.findById(req.userId, "addItems");
+
+    return res.status(200).json({
+      status: 1,
+      data: data,
+
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: 0,
+      message: "something went wrong",
+      error: error
+    });
+  }
+};
