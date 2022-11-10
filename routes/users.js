@@ -12,7 +12,7 @@ router.post("/register", userController.register);
 router.get("/verify/:userId/:uniqueString", userController.verify);
 
 
-//router.post("/login", userController.login);
+router.post("/login", userController.login);
 
 
 
