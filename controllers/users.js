@@ -131,7 +131,7 @@ exports.addressCreate = async (req, res) => {
 };
 exports.phoneNoCreate = async (req, res) => {
   const { Number } = req.body;
-  console.log(req.userId, "======", Number);
+
 
   try {
     if (req.userId == undefined) {
@@ -152,6 +152,59 @@ exports.phoneNoCreate = async (req, res) => {
     return res.status(500).json({
       status: 0,
       message: "something went wrong",
+    });
+  }
+};
+
+exports.addItem = async (req, res) => {
+  const { addItem } = req.body;
+  console.log(req.userId, "======", addItem);
+
+  try {
+    if (req.userId == undefined) {
+      return res.status(401).json({
+        status: 0,
+        message: "request not authorize."
+      })
+    }
+    const data = await User.findByIdAndUpdate(req.userId, {
+      $push: { addItems: addItem },
+    });
+    return res.status(200).json({
+      status: 1,
+      message: "item add Successfully",
+
+    });
+  } catch (err) {
+    return res.status(500).json({
+      status: 0,
+      message: "something went wrong",
+    });
+  }
+};
+
+exports.removeItem = async (req, res) => {
+  const { itemId } = req.body;
+  try {
+    const allarray = await User.findById(req.userId, "addItems");
+    const data = allarray.addItems.filter((int) => {
+      return int !== itemId;
+    });
+    console.log(data);
+    const newUser = await User.findByIdAndUpdate(req.userId, {
+      addItems: data,
+    });
+
+    return res.status(200).json({
+      status: 1,
+      message: "item remove Successfully",
+
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: 0,
+      message: "something went wrong",
+      error: error
     });
   }
 };

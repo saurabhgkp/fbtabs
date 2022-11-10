@@ -21,6 +21,10 @@ router.post("/addressCreate", isAuth, userController.addressCreate);
 router.post("/phoneNoCreate", isAuth, userController.phoneNoCreate);
 // checkout model  userId ProductId status address  Schedule time Instructions Subtotal(jsonb)
 
+router.post("/addItem", isAuth, userController.addItem);
+router.post("/removeItem", isAuth, userController.removeItem);
+//router.post("/checkoutCreate", isAuth, userController.checkoutCreate);
+
 //Delivery Schedule, Delivery Instructions,Delivery Tip, Subtotal
 
 //stripe payment 

@@ -8,7 +8,7 @@ const users = mongoose.Schema({
   uniqueString: String,
   address: String,
   phoneNo: Number,
-
+  addItems: [],
   isActive: {
     type: Boolean,
     default: false,
