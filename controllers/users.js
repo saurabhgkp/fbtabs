@@ -60,7 +60,7 @@ exports.verify = async (req, res) => {
       });
     }
     else {
-      return res.status(201).json({
+      return res.status(500).json({
         message: "something went wrong",
 
       });
@@ -103,3 +103,23 @@ exports.login = async (req, res) => {
   }
 };
 
+exports.address = async (req, res) => {
+  const { address } = req.body;
+
+  const userId = req.userId
+
+  try {
+    const data = await User.findByIdAndUpdate(userId, {
+      address: address,
+    });
+    return res.status(200).json({
+      status: 1,
+      address: address,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      status: 0,
+      message: "something went wrong",
+    });
+  }
+};

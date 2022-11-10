@@ -16,7 +16,7 @@ router.get("/verify/:userId/:uniqueString", userController.verify);
 router.post("/login", userController.login);
 
 // Address Contact Number add 
-
+router.post("/address", userController.address);
 // Address Contact Number edit
 
 // Address Contact Number delete
