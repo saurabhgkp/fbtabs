@@ -78,14 +78,14 @@ exports.verify = async (req, res) => {
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
-  //const hashPassword = await bcrypt.hash(password, 10);
+
   const data = await User.findOne({
     where: { email: email, isActive: true },
   });
-  // console.log(data);
-  try {
-    const isData = await bcrypt.compare(hashPassword, data.password);
 
+  try {
+    const isData = await bcrypt.compare(password, data.password);
+    console.log(isData);
     if (data && isData) {
       const token = jwt.sign({ userId: data.id }, process.env.JWT_SECRET);
       return res.status(200).json({
