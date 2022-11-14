@@ -1,12 +1,11 @@
-const nodemailer = require("nodemailer")
-const { v4: uuidv4 } = require("uuid")
+const nodemailer = require("nodemailer");
+const { v4: uuidv4 } = require("uuid");
 const User = require("../models/usres");
-const bcrypt = require('bcrypt');
-
+const bcrypt = require("bcrypt");
 
 exports.mailerFun = async (email, name, userId) => {
-  const baseurl = 'http://localhost:4000/'
-  const uniqueString = uuidv4() + userId
+  const baseurl = process.env.BASEURL;
+  const uniqueString = uuidv4() + userId;
   let transporter = nodemailer.createTransport({
     service: "gmail",
     host: "smtp",
@@ -16,7 +15,10 @@ exports.mailerFun = async (email, name, userId) => {
       pass: process.env.USER_PASSWORD,
     },
   });
-  console.log("=====", `${baseurl + "users/verify/" + userId + "/" + uniqueString}`);
+  console.log(
+    "=====",
+    `${baseurl + "users/verify/" + userId + "/" + uniqueString}`
+  );
   // send mail with defined transport object
   let info = await transporter.sendMail({
     from: '"Tabs Care" <process.env.FROM>', // sender address
@@ -31,7 +33,9 @@ exports.mailerFun = async (email, name, userId) => {
           <p style="font-size:1.1em">Hi,</p>
           <p>Thank you for choosing Tabs Care. Use the following Link to complete your Sign Up procedures</p>
           <h2 style="background: #4044ee;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">
-             <a href=${baseurl + "users/verify/" + userId + "/" + uniqueString} style=" color:white"> verify </a> 
+             <a href=${
+               baseurl + "users/verify/" + userId + "/" + uniqueString
+             } style=" color:white"> verify </a> 
               
               </h2>
           <p style="font-size:0.9em;">Regards,<br />Tabs Care</p>
@@ -44,10 +48,9 @@ exports.mailerFun = async (email, name, userId) => {
           </div>
         </div>
       </div>`, // html body
-  })
+  });
   const newVerification = await bcrypt.hash(uniqueString, 10);
   const data = await User.findByIdAndUpdate(userId, {
     uniqueString: newVerification,
   });
-
-}
+};
