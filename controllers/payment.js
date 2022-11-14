@@ -31,7 +31,6 @@ exports.Webhook = async (request, response) => {
     case "payment_intent.succeeded":
       const paymentIntent = event.data.object;
       // Then define and call a method to handle the successful payment intent.
-      // handlePaymentIntentSucceeded(paymentIntent);
       //update db and send payment mail to user
       break;
     case "payment_intent.payment_failed":

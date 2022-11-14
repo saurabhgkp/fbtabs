@@ -8,8 +8,9 @@ router.get("/", function (req, res) {
 });
 
 //router.get("/getAllUserData", adminController.getAllUserData);
+router.post("/addProduct", adminController.addProduct);
+router.get("/getAllUserData", adminController.getAllUserData);
 
-//add product // edit // delete //
 //status delivery with mail to user
 
 module.exports = router;
