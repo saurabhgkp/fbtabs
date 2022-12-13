@@ -15,10 +15,12 @@ app.use(logger("dev"));
 const indexRouter = require("./routes/index");
 const userRouter = require("./routes/users");
 const paymentRouter = require("./routes/payment");
+const examRouter = require("./routes/exam");
 
 app.use("/", indexRouter);
 app.use("/users", userRouter);
 app.use("/payment", paymentRouter);
+app.use("/exam", examRouter);
 
 // database and server connection
 
