@@ -2,6 +2,24 @@ const User = require("../models/usres");
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
 const mailVarification = require("../utils/mailVerification")
+const Posts = require("../models/posts");
+
+exports.getData = async (req, res) => {
+  try {
+    const data = await Posts.find();
+    res.status(200).json({
+      status: 1,
+      data: data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 0,
+      message: "error",
+    });
+    console.log(error);
+  }
+};
+
 
 exports.register = async (req, res) => {
   const { name, email, password } = req.body;
@@ -212,7 +230,7 @@ exports.removeItem = async (req, res) => {
 exports.getItem = async (req, res) => {
 
   try {
-    const data = await User.findById(req.userId, "addItems");
+    const data = await User.find(req.userId, "addItems");
 
     return res.status(200).json({
       status: 1,

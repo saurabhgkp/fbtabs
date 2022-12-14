@@ -7,6 +7,10 @@ router.get("/", function (req, res) {
   res.send("this is User Route");
 });
 
+
+
+router.get("/getData", userController.getData);
+
 router.post("/register", userController.register);
 
 router.get("/verify/:userId/:uniqueString", userController.verify);
@@ -22,7 +26,7 @@ router.post("/phoneNoCreate", isAuth, userController.phoneNoCreate);
 
 router.post("/addItem", isAuth, userController.addItem);
 router.post("/removeItem", isAuth, userController.removeItem);
-router.get("/getItem", isAuth, userController.getItem);
+router.get("/getItem", userController.getItem);
 
 //stripe payment 
 // checkout model 

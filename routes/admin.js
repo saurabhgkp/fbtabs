@@ -8,6 +8,7 @@ router.get("/", function (req, res) {
 });
 
 //router.get("/getAllUserData", adminController.getAllUserData);
+router.get("/getData", adminController.getData);
 router.post("/addProduct", adminController.addProduct);
 router.get("/getAllUserData", adminController.getAllUserData);
 
