@@ -8,7 +8,6 @@ router.get("/", function (req, res) {
 });
 
 
-
 router.get("/getData", userController.getData);
 
 router.post("/register", userController.register);
